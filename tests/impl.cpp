@@ -427,6 +427,9 @@ const char *SSE2NEONTest::getInstructionTestString(InstructionTest test)
     case IT_MM_COMINEQ_SS:
         ret = "MM_COMINEQ_SS";
         break;
+    case IT_MM_CVT_SS2SI:
+        ret = "MM_CVT_SS2SI";
+        break;
     case IT_MM_CVTTPS_EPI32:
         ret = "MM_CVTTPS_EPI32";
         break;
@@ -2242,6 +2245,15 @@ bool test_mm_hadd_epi16(const int16_t *_a, const int16_t *_b)
     return validateInt16(ret, d0, d1, d2, d3, d4, d5, d6, d7);
 }
 
+bool test_mm_cvt_ss2si(const float *_a)
+{
+    int32_t d0 = (int32_t) _a[0];
+
+    __m128 a = test_mm_load_ps(_a);
+    int32_t ret = _mm_cvt_ss2si(a);
+    return abs(ret - d0) <= 1;
+}
+
 bool test_mm_cvttps_epi32(const float *_a)
 {
     __m128 a = test_mm_load_ps(_a);
@@ -3697,6 +3709,9 @@ public:
             break;
         case IT_MM_CMPGT_EPI32:
             ret = test_mm_cmpgt_epi32(mTestIntPointer1, mTestIntPointer2);
+            break;
+        case IT_MM_CVT_SS2SI:
+            ret = test_mm_cvt_ss2si(mTestFloatPointer1);
             break;
         case IT_MM_CVTTPS_EPI32:
             ret = test_mm_cvttps_epi32(mTestFloatPointer1);

@@ -46,6 +46,7 @@ enum InstructionTest {
     IT_MM_COMILE_SS,
     IT_MM_COMILT_SS,
     IT_MM_COMINEQ_SS,
+    IT_MM_CVT_SS2SI,
     IT_MM_CVTSS_F32,  // Unimplemented
     IT_MM_DIV_PS,     // Unimplemented
     IT_MM_DIV_SS,     // Unimplemented

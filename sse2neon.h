@@ -3536,6 +3536,14 @@ FORCE_INLINE int _mm_comineq_ss(__m128 a, __m128 b)
 
 /* Conversions */
 
+// Convert the lower single-precision (32-bit) floating-point element in a to a
+// 32-bit integer, and store the result in dst.
+// https://software.intel.com/sites/landingpage/IntrinsicsGuide/#text=_mm_cvt_ss2si
+FORCE_INLINE int _mm_cvt_ss2si(__m128 a)
+{
+    return vgetq_lane_s32(vcvtq_s32_f32(vreinterpretq_f32_m128(a)), 0);
+}
+
 // Converts the four single-precision, floating-point values of a to signed
 // 32-bit integer values using truncate.
 // https://msdn.microsoft.com/en-us/library/vstudio/1h005y6x(v=vs.100).aspx
